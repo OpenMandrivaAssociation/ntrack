@@ -6,6 +6,7 @@ License:        LGPLv3
 Url:            https://launchpad.net/%{name}
 Source:         http://launchpad.net/%{name}/main/%{version}/+download/%{name}-%{version}.tar.gz
 Group:          Development/C
+BuildRequires:  autoconf automake libtool
 BuildRequires:  libqt4-devel
 BuildRequires:  libnl-devel
 BuildRequires:  python-devel
@@ -206,7 +207,7 @@ Development files (headers and libraries) for ntrack
 %setup -q 
 
 %build
-mkdir m4
+mkdir -p m4
 autoreconf -fi
 %configure
 %make
