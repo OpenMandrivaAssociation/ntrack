@@ -1,13 +1,11 @@
 Name:           ntrack
 Summary:        Network Connectivity Tracking library for Desktop Applications
-Version:        014
-Release:        %mkrel 4
+Version:        016
+Release:        %mkrel 1
 License:        LGPLv3
 Url:            https://launchpad.net/%{name}
 Source:         http://launchpad.net/%{name}/main/%{version}/+download/%{name}-%{version}.tar.gz
 Group:          Development/C
-Patch0:		ntrack-014-upstream-fix.patch
-Patch1:		http://fasmz.org/~pterjan/tmp/ntrack-014-aliasing.patch
 BuildRequires:  libqt4-devel
 BuildRequires:  libnl-devel
 BuildRequires:  python-devel
@@ -206,7 +204,6 @@ Development files (headers and libraries) for ntrack
  
 %prep
 %setup -q 
-%apply_patches 
 
 %build
 mkdir m4
