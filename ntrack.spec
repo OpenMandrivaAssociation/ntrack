@@ -5,12 +5,13 @@ Release:        %mkrel 1
 License:        LGPLv3
 Url:            https://launchpad.net/%{name}
 Source:         http://launchpad.net/%{name}/main/%{version}/+download/%{name}-%{version}.tar.gz
+Patch0:		ntrack-016-relaxed_flags.diff
 Group:          Development/C
 BuildRequires:  autoconf automake libtool
 BuildRequires:  libqt4-devel
 BuildRequires:  libnl-devel
 BuildRequires:  python-devel
-
+BuildRequires:	libnl3-devel
 
 %description
 ntrack aims to be a lightweight and easy to use library for application
@@ -24,7 +25,8 @@ Also its supposed to be lightweight, resource un-intensive and extensible.
 %files
 %defattr(-,root,root)
 %doc README NEWS COPYING COPYING.LESSER ChangeLog AUTHORS
-%{_libdir}/ntrack/modules/ntrack-libnl1.so 
+%{_libdir}/ntrack/modules/ntrack-libnl1.so
+%{_libdir}/ntrack/modules/ntrack-libnl3_x.so
 #------------------------------------------------------------------------------
 
 %define ntrack_major 0
@@ -196,7 +198,6 @@ Development files (headers and libraries) for ntrack
   
 %files devel
 %defattr(-,root,root)
-%{_datadir}/doc/ntrack/
 %dir %{_includedir}/ntrack
 %{_includedir}/ntrack/common/
 
@@ -205,6 +206,7 @@ Development files (headers and libraries) for ntrack
  
 %prep
 %setup -q 
+%patch0 -p1
 
 %build
 mkdir -p m4
@@ -221,9 +223,8 @@ rm -rf %{buildroot}/%{_libdir}/*.la
 rm -rf %{buildroot}/%{_libdir}/ntrack/modules/*.a
 rm -rf %{buildroot}/%{_libdir}/ntrack/modules/*.la
 
- 
+# dupes
+rm -rf %{buildroot}%{_datadir}/doc/ntrack
+
 %clean
 rm -rf %{buildroot}
-
-
-
