@@ -228,3 +228,40 @@ rm -rf %{buildroot}%{_datadir}/doc/ntrack
 
 %clean
 rm -rf %{buildroot}
+
+
+%changelog
+* Tue Feb 21 2012 Jon Dill <dillj@mandriva.org> 016-3mdv2012.0
++ Revision: 778765
+- rebuild against new version of libffi4
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - relink against libpcre.so.1
+
+* Tue Nov 22 2011 Oden Eriksson <oeriksson@mandriva.com> 016-1
++ Revision: 732374
+- P0: remove -Werror and -pedantic (thanks pcpa)
+- enable libnl 3.2.x support
+- fix build
+- 016
+
+* Fri Sep 02 2011 Oden Eriksson <oeriksson@mandriva.com> 014-4
++ Revision: 697779
+- import ntrack
+
+
+* Fri Aug 26 2011 Oden Eeriksson <oeriksson@mandriva.com> 014-4
+- added P1 by pterjan
+
+* Fri Jul 01 2011 mikala <mikala> 014-3.mga2
++ Revision: 117124
+- Add patch0 to fix a symbol error (should fix mga #1976)
+
+* Sun Jun 26 2011 mikala <mikala> 014-2.mga2
++ Revision: 113911
+- Fix some provides & requires
+
+* Sun Jun 26 2011 mikala <mikala> 014-1.mga2
++ Revision: 113868
+- imported package ntrack
+
