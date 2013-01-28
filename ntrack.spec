@@ -11,7 +11,7 @@ Group:          Development/C
 BuildRequires:  autoconf automake libtool
 BuildRequires:  libqt4-devel
 BuildRequires:  libnl-devel
-BuildRequires:  python-devel
+BuildRequires:  python-devel python-gobject-devel
 BuildRequires:	libnl3-devel
 
 %description
