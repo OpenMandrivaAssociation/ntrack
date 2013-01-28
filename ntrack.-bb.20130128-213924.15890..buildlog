@@ -1,0 +1,38 @@
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.16882
++ umask 022
++ cd /home/bero/abf/ntrack/BUILD
++ '[' 1 -eq 1 ']'
++ '[' 1 -eq 1 ']'
++ '[' 1 -eq 1 ']'
++ cd /home/bero/abf/ntrack/BUILD
++ rm -rf ntrack-016
++ /bin/gzip -dc /home/bero/abf/ntrack/ntrack-016.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd ntrack-016
++ echo 'Patch #0 (ntrack-016-relaxed_flags.diff):'
+Patch #0 (ntrack-016-relaxed_flags.diff):
++ /bin/cat /home/bero/abf/ntrack/ntrack-016-relaxed_flags.diff
++ /usr/bin/patch --fuzz=0 -s -U -p1
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.16882
++ umask 022
++ cd /home/bero/abf/ntrack/BUILD
++ cd ntrack-016
++ '[' 1 -eq 1 ']'
++ '[' 1 -eq 1 ']'
++ mkdir -p m4
++ autoreconf -fi
+configure.ac:32: error: 'AM_CONFIG_HEADER': this macro is obsolete.
+    You should use the 'AC_CONFIG_HEADERS' macro instead.
+/usr/share/aclocal-1.13/obsolete-err.m4:12: AM_CONFIG_HEADER is expanded from...
+configure.ac:32: the top level
+autom4te: /usr/bin/m4 failed with exit status: 1
+aclocal: error: echo failed with exit status: 1
+autoreconf: aclocal failed with exit status: 1
+error: Bad exit status from /var/tmp/rpm-tmp.16882 (%build)
+
+
+RPM build errors:
+    Bad exit status from /var/tmp/rpm-tmp.16882 (%build)

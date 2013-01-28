@@ -1,0 +1,73 @@
+#
+#  Copyright (C) 2009,2010  Alexander Sack <asac@jwsdot.com>
+#
+#  This file is part of:
+#      ntrack - Network Status Tracking for Desktop Applications
+#               http://launchpad.net/ntrack
+#
+#   ntrack is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU Lesser General Public License as
+#   published by the Free Software Foundation, either version 3 of
+#   the License, or (at your option) any later version.
+#
+#   ntrack is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU Lesser General Public License for more details.
+#
+#   You should have received a copy of the GNU Lesser General Public
+#   License along with ntrack.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+SUBDIRS = test
+CLEANFILES =
+NTRACK_GLIB_LT_VERSION = 2:1:0
+
+AM_CFLAGS = \
+	-Wall \
+	-Werror \
+	-pedantic \
+	-I$(srcdir)/../common/
+
+AM_LDFLAGS =
+
+lib_LTLIBRARIES = libntrack-glib.la
+
+glibpkgincludedir = $(pkgincludedir)/glib
+gobjectpkgincludedir = $(pkgincludedir)/gobject
+
+libntrack_glib_la_SOURCES = \
+	ntrack-gsource.h ntrack-gsource.c
+
+nodist_libntrack_glib_la_SOURCES = \
+	$(_nodist_gobject_sources)
+
+libntrack_glib_la_CFLAGS = \
+	$(AM_CFLAGS) \
+	$(GLIB_CFLAGS)
+
+libntrack_glib_la_LIBADD = \
+	$(GLIB_LIBS) \
+	../common/libntrack.la
+
+libntrack_glib_la_LDFLAGS = \
+	$(AM_LDFLAGS) \
+	-export-symbols $(srcdir)/ntrack-glib.symbols \
+	-no-undefined \
+	-version-info $(NTRACK_GLIB_LT_VERSION)
+
+EXTRA_DIST = \
+	libntrack-glib.pc.in \
+	ntrack-glib.symbols
+
+glibpkginclude_HEADERS = \
+	ntrack-enums.h \
+	ntrack-glib.h \
+	ntrack-gsource.h
+
+BUILT_SOURCES =
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = \
+	libntrack-glib.pc
+

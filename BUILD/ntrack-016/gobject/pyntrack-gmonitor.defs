@@ -1,0 +1,320 @@
+;; -*- scheme -*-
+; object definitions ...
+(define-object GMonitor
+  (in-module "NTrack")
+  (parent "GObject")
+  (c-name "NTrackGMonitor")
+  (gtype-id "N_TYPE_TRACK_GMONITOR")
+)
+
+;; Enumerations and flags ...
+
+(define-enum GlibState
+  (in-module "NTrack")
+  (c-name "NTrackGlibState")
+  (gtype-id "N_TYPE_TRACK_GLIB_STATE")
+  (values
+    '("unset" "NTRACK_GLIB_STATE_UNSET")
+    '("online" "NTRACK_GLIB_STATE_ONLINE")
+    '("offline" "NTRACK_GLIB_STATE_OFFLINE")
+    '("blocked" "NTRACK_GLIB_STATE_BLOCKED")
+    '("unknown" "NTRACK_GLIB_STATE_UNKNOWN")
+  )
+)
+
+(define-enum GlibEvent
+  (in-module "NTrack")
+  (c-name "NTrackGlibEvent")
+  (gtype-id "N_TYPE_TRACK_GLIB_EVENT")
+  (values
+    '("unset" "NTRACK_GLIB_EVENT_UNSET")
+    '("connect" "NTRACK_GLIB_EVENT_CONNECT")
+    '("disconnect" "NTRACK_GLIB_EVENT_DISCONNECT")
+    '("reconnect" "NTRACK_GLIB_EVENT_RECONNECT")
+  )
+)
+
+
+;; From ntrack-gmonitor.h
+
+(define-function ntrack_g_monitor_get_type
+  (c-name "ntrack_g_monitor_get_type")
+  (return-type "GType")
+  (parameters
+  )
+)
+
+(define-function ntrack_g_monitor_get
+  (c-name "ntrack_g_monitor_get")
+  (return-type "NTrackGMonitor*")
+  (parameters
+  )
+)
+
+
+
+;; From ntrack-gobject.h
+
+
+
+;; From ntrack-enums.h
+
+
+
+;; From ntrack-glib.h
+
+
+
+;; From ntrack-gsource.h
+
+(define-function ntrack_g_source_new
+  (c-name "ntrack_g_source_new")
+  (is-constructor-of "NtrackGSource")
+  (return-type "GSource*")
+  (parameters
+  )
+)
+
+(define-function ntrack_g_source_add
+  (c-name "ntrack_g_source_add")
+  (return-type "guint")
+  (parameters
+    '("NTrackGlibSourceFunc" "func")
+    '("gpointer" "data")
+  )
+)
+
+(define-function ntrack_g_source_add_full
+  (c-name "ntrack_g_source_add_full")
+  (return-type "guint")
+  (parameters
+    '("gint" "priority")
+    '("NTrackGlibSourceFunc" "func")
+    '("gpointer" "data")
+    '("GDestroyNotify" "notify")
+  )
+)
+
+(define-function ntrack_glib_get_state
+  (c-name "ntrack_glib_get_state")
+  (return-type "NTrackGlibState")
+  (parameters
+  )
+)
+
+
+
+;; From ntrackarchapi.h
+
+
+
+;; From ntrackarch.h
+
+(define-function ntrack_arch_get_rfds
+  (c-name "ntrack_arch_get_rfds")
+  (return-type "int*")
+  (parameters
+    '("ntrack_monitor_t*" "self")
+  )
+)
+
+(define-function ntrack_arch_process_data
+  (c-name "ntrack_arch_process_data")
+  (return-type "int")
+  (parameters
+    '("ntrackpointer" "self")
+    '("int*" "fds")
+  )
+)
+
+(define-function ntrack_arch_free
+  (c-name "ntrack_arch_free")
+  (return-type "none")
+  (parameters
+    '("ntrackpointer" "self")
+  )
+)
+
+
+
+;; From ntrackbase.h
+
+(define-function ntrack_info_human_banner
+  (c-name "ntrack_info_human_banner")
+  (return-type "const-char*")
+  (parameters
+  )
+)
+
+
+
+;; From ntrackcompare.h
+
+
+
+;; From ntrack.h
+
+
+
+;; From ntrackidpool.h
+
+(define-function ntrack_id_pool_acquire
+  (c-name "ntrack_id_pool_acquire")
+  (return-type "long")
+  (parameters
+    '("ntrack_id_pool_t*" "self")
+  )
+)
+
+(define-function ntrack_id_pool_release
+  (c-name "ntrack_id_pool_release")
+  (return-type "none")
+  (parameters
+    '("ntrack_id_pool_t*" "self")
+    '("long" "id")
+  )
+)
+
+(define-function ntrack_id_pool_free
+  (c-name "ntrack_id_pool_free")
+  (return-type "none")
+  (parameters
+    '("ntrack_id_pool_t*" "self")
+  )
+)
+
+
+
+;; From ntracklist.h
+
+(define-function ntrack_list_insert_sorted_unique
+  (c-name "ntrack_list_insert_sorted_unique")
+  (return-type "ntrack_list_t*")
+  (parameters
+    '("ntrack_list_t*" "list")
+    '("ntrackpointer" "data")
+    '("int" "unique")
+    '("ntrack_compare_f" "func")
+  )
+)
+
+(define-function ntrack_list_append
+  (c-name "ntrack_list_append")
+  (return-type "ntrack_list_t*")
+  (parameters
+    '("ntrack_list_t*" "list")
+    '("ntrackpointer" "data")
+  )
+)
+
+(define-function ntrack_list_remove
+  (c-name "ntrack_list_remove")
+  (return-type "ntrack_list_t*")
+  (parameters
+    '("ntrack_list_t*" "list")
+    '("ntrack_list_t*" "elem")
+  )
+)
+
+(define-function ntrack_list_size
+  (c-name "ntrack_list_size")
+  (return-type "int")
+  (parameters
+    '("ntrack_list_t*" "list")
+  )
+)
+
+(define-function ntrack_list_foreach
+  (c-name "ntrack_list_foreach")
+  (return-type "none")
+  (parameters
+    '("ntrack_list_t*" "list")
+    '("ntrack_list_cb_f" "func")
+    '("ntrackpointer" "user_data")
+  )
+)
+
+(define-function ntrack_list_free
+  (c-name "ntrack_list_free")
+  (return-type "none")
+  (parameters
+    '("ntrack_list_t*" "list")
+  )
+)
+
+
+
+;; From ntrackmacros.h
+
+
+
+;; From ntrackmonitor.h
+
+(define-function ntrack_monitor_put
+  (c-name "ntrack_monitor_put")
+  (return-type "none")
+  (parameters
+    '("ntrack_monitor_t*" "monitor")
+  )
+)
+
+(define-function ntrack_monitor_register
+  (c-name "ntrack_monitor_register")
+  (return-type "ntrackpointer")
+  (parameters
+    '("ntrack_monitor_t*" "self")
+    '("ntrack_monitor_callback_f" "callback")
+    '("ntrackpointer" "data")
+  )
+)
+
+(define-function ntrack_monitor_register_full
+  (c-name "ntrack_monitor_register_full")
+  (return-type "ntrackpointer")
+  (parameters
+    '("ntrack_monitor_t*" "self")
+    '("ntrack_monitor_callback_f" "callback")
+    '("ntrackpointer" "data")
+    '("ntrack_destroy_f" "func")
+  )
+)
+
+(define-function ntrack_monitor_remove
+  (c-name "ntrack_monitor_remove")
+  (return-type "int")
+  (parameters
+    '("ntrack_monitor_t*" "self")
+    '("ntrackpointer" "handle")
+  )
+)
+
+(define-function ntrack_monitor_get_rfds
+  (c-name "ntrack_monitor_get_rfds")
+  (return-type "int*")
+  (parameters
+    '("ntrack_monitor_t*" "self")
+  )
+)
+
+(define-function ntrack_monitor_process_data
+  (c-name "ntrack_monitor_process_data")
+  (return-type "int")
+  (parameters
+    '("ntrack_monitor_t*" "self")
+    '("int*" "fds")
+  )
+)
+
+(define-function ntrack_monitor_get_state
+  (c-name "ntrack_monitor_get_state")
+  (return-type "ntrack_state_t")
+  (parameters
+    '("ntrack_monitor_t*" "self")
+  )
+)
+
+
+
+;; From ntrackutil.h
+
+

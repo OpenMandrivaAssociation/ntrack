@@ -1,0 +1,11 @@
+--- ntrack-016/configure.ac.bero	2013-01-28 21:39:38.364890358 +0100
++++ ntrack-016/configure.ac	2013-01-28 21:39:46.212796953 +0100
+@@ -29,7 +29,7 @@ dnl Every other copy of the package vers
+ AM_INIT_AUTOMAKE(ntrack, 016)
+ 
+ dnl create a config.h file (Automake will add -DHAVE_CONFIG_H)
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS([config.h])
+ 
+ dnl enable maintainer mode by default
+ AM_MAINTAINER_MODE([enable])

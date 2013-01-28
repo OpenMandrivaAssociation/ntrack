@@ -1,0 +1,1632 @@
+2011-11-13  Alexander Sack  <asac@jwsdot.com>
+
+	Release 016
+
+2011-11-13  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS for 016 release
+
+2011-11-13  Alexander Sack  <asac@jwsdot.com>
+
+	modules[rtnetlink]: fix potentially uninitialized access to link.ifla_name reported on hardt-amd64
+
+2011-11-13  Alexander Sack  <asac@jwsdot.com>
+
+	make rtnetlink header check in configure.ac portable across linux flavours
+
+2011-11-12  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 016 development
+
+2011-11-12  Alexander Sack  <asac@jwsdot.com>
+
+	Release 015
+
+2011-11-12  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS for 015 release
+
+2011-11-12  Alexander Sack  <asac@jwsdot.com>
+
+	implement --enable-backend=backend1,backend2 configure option to enable one or many backends
+	
+	* update README info accordingly
+	* drop --enable/disable-module-XXX options from configure
+
+2011-10-29  Alexander Sack  <asac@jwsdot.com>
+
+	glib[test]: dump 'Initial state' in mtest-gsource before entering mainloop
+
+2011-10-23  Alexander Sack  <asac@jwsdot.com>
+
+	modules[rtnetlink]: fix strict-aliasing violation in newroute addr parsing code
+
+2011-10-23  Alexander Sack  <asac@jwsdot.com>
+
+	modules: use -Wno-variadic-macros to allow variadic macros; fix build failures on gcc < 4.6
+
+2011-10-22  Alexander Sack  <asac@jwsdot.com>
+
+	rename netlink to rtnetlink in configure.ac and modules/Makefile.am
+	
+	- changes configure option to --disable-module-rtnetlink
+	- fix name mismatch of module and configure/makefile switches; we
+	use 'rtnetlink' everywhere now
+
+2011-10-22  Alexander Sack  <asac@jwsdot.com>
+
+	introduce configure switch AC_ARG_ENABLE([module-libnl], ...; disables building libnl modules
+
+2011-10-22  Alexander Sack  <asac@jwsdot.com>
+
+	add 'Selecting Backend Module (Build)' and '... (Runtime)' sections to README
+
+2011-10-22  Alexander Sack  <asac@jwsdot.com>
+
+	list rtnetlink module in README
+
+2011-10-22  Alexander Sack  <asac@jwsdot.com>
+
+	document availability of libnl3 libnl3.1 and libnl3.x ntrack modules
+
+2011-10-21  Alexander Sack  <asac@jwsdot.com>
+
+	fix copyright years in 'Licensing' of README
+
+2011-10-21  Alexander Sack  <asac@jwsdot.com>
+
+	ship 3rd-party files in source; add to top-level Makefile.am EXTRA_DIST
+
+2011-10-21  Alexander Sack  <asac@jwsdot.com>
+
+	3rd-party[libnl-3.1]: add license info for patches against libnl component
+
+2011-10-21  Alexander Sack  <asac@jwsdot.com>
+
+	common: don't ignore return value of pipe(...) in _builtin_noop_monitor_new
+
+2011-10-21  Alexander Sack  <asac@jwsdot.com>
+
+	modules[libnl]: add libnl3.x backend for libnl-3.x (v3.2 or later)
+
+2011-10-21  Alexander Sack  <asac@jwsdot.com>
+
+	libnl has broken .pc versioning after 3.1; build LIBNL3 backend only for libnl-3.0 = 3.0
+	
+	libnl 3.2 release and git head bounce back to version 3.0 in .pc files even though
+	SONAME was changed; this causes problem building one backend for all libnl releases
+	that have a libnl-3.0 .pc file.
+	
+	To prepare introduction of 3.2 and later libnl support we have to constraint
+	building LIBNL3 backend variant for libnl-3.0 = 3.0 so we can introduce a LIBNL3_2
+	in the future that matches libnl-3.0 > 3.1
+
+2011-10-21  Alexander Sack  <asac@jwsdot.com>
+
+	modules[libnl]: support libnl v3.1 - lp:879141
+	
+	+ add build infrastructure to configure.ac
+	+ add a new backend major version to modules/Makefile.am
+	+ add code (ifdefs) to modules/ntrack-libnl.c; use 2.0/3.0 codepaths
+	+ add patch fixing crash in recycle unit test caused by dangling
+	pointer in libnl. If make check fails, remember to check if your libnl
+	has this patch
+	+ dump a prominent warning in configure if libnl 3.1 is found
+
+2011-10-16  Alexander Sack  <asac@jwsdot.com>
+
+	gobject[test]: beautify mtest-gmonitor ntrack banner output by using g_print
+
+2011-10-16  Alexander Sack  <asac@jwsdot.com>
+
+	modules[rtnetlink]: topmostr has to obey monitor lifecycle; move to global var to instance struct
+
+2011-10-16  Alexander Sack  <asac@jwsdot.com>
+
+	glib: minor coding style tweak in test-gsource-recycle.c
+
+2011-10-16  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix noop monitor crash caused by double free of pipe fd buffer; hand out copy of rfds
+
+2011-10-16  Alexander Sack  <asac@jwsdot.com>
+
+	modules[libnl]: add support to build all libnl version backends in one shot lp:801407
+
+2011-10-16  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix poll problems for noop monitor; use pipe to get valid rfds; thx to Alex Merry (randomguy3) lp:785119
+
+2011-10-16  Alexander Sack  <asac@jwsdot.com>
+
+	call aclocal in autogen.sh; thx to Sanjaya Karunasena (sanjayak) lp:774690
+
+2011-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	glib: fix memleak; free rfds in ntrack_g_source_new
+
+2011-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	modules: link all modules against libntrack.la; thx to Felix Geyer (debfx) and Arkadiusz Miśkiewicz (arekm) - lp:750554
+
+2011-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	modules: build rtnetlink module if HAVE_MODULE_NETLINK; allow -Wno-error=variadic-macros
+
+2011-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	modules[rtnetlink]: land code of rtnetlink backend - lp:448400
+
+2011-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	define AM_CONDITIONAL(HAVE_MODULE_NETLINK... if rtnetlink module will be build
+
+2011-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix strict-aliasing access in ntrack.c module initialization code; thx to Pascal Terjan - lp:834639
+
+2011-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix leak module location string and simplify module init loop code in ntrack.c
+
+2011-09-27  Alexander Sack  <asac@jwsdot.com>
+
+	modules[libnl]: check if route oif has an address assigned before considering it a valid topmost route - kde:282153
+
+2011-09-27  Alexander Sack  <asac@jwsdot.com>
+
+	modules[libnl]: refactor interface link lookup code in update_connectivity
+
+2011-09-27  Alexander Sack  <asac@jwsdot.com>
+
+	introduce --disable-module-netlink and add infrastructure for linux kernel API based module-netlink to configure.ac
+
+2011-04-25  Alexander Sack  <asac@jwsdot.com>
+
+	modules[libnl]: fix infinite loop if route oif/nhopif is NULL; thx to csslayer for helping - lp:755608
+
+2011-04-25  Alexander Sack  <asac@jwsdot.com>
+
+	modules[libnl]: trigger update_connectivty on neighbour change events as well
+
+2011-04-25  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix typo in ntrack_util_event_to_ascii so that it echos proper string for RECONNECT
+
+2011-04-04  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 015 development
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	Release 014
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS for 014 release
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	license: fix copyright years to include 2010 for various files missed before
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	license: add license header to mtest-qmonitor.cpp
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	license: add license header to configure.ac
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	update copyright years to include 2011 for various files
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	qt4[test]: print human readable ntrack info to console in mtest-qmonitor
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	gobject[test]: print human readable ntrack info to console in mtest-gmonitor
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	glib[test]: print human readable ntrack info to console in mtest-gsource
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	common[test]: print human readable ntrack info to console in mtest-monitor
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	common: add human readable banner about ntrack version, author/copyright and backend to base API - lp:749608
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	common: make out of local static struct ftbl_initialized a global one
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	common: make global struct _ntrack_module module a static struct
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	build: add AC_DEFINEs for AUTHOR, COPYRIGHT and LICENSE
+	* AUTHOR: Alexander Sack <asac@jwsdot.com>
+	* COPYRIGHT: Copyright (C) 2009-2011
+	* LICENSE: GPLv3+ or LGPLv3+
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	common: update module location field with filepath and stop echoing backend path to console
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	common: add location field to ntrackarchapi's _ntrack_module_info struct
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	common: add struct _ntrack_module_info as parent struct of _ntrack_module with name and longname fields
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	modules: use discrete module name and longname for libnl1, libnl2, libnl3 backends
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	common: new built-in noop monitor fallback backend - lp:748988
+	
+	* gracefully handles deployments where no usable backend module is available
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	add support for libnl-3.0 - lp:743879
+	+ merged branch lp:~asac/ntrack/lp743879
+	+ Thanks to Arkadiusz Miśkiewicz for the prototype patch
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	build: add support for building HAVE_LIBNL3 to configure.ac and Makefile.am - lp:743879
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	modules: add support for building HAVE_LIBNL3 to code - lp:743879
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	modules: make it less painful to maintain more libnl version variants by using '#elif defined'
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	build: make it easier to add support of more libnl versions to modules/Makefile.am
+
+2011-04-03  Alexander Sack  <asac@jwsdot.com>
+
+	common: improve logging of module loading; print full path of used modules
+
+2011-04-03  Alexander Sack  <asac@linaro.org>
+
+	merge::build: improve H2DEF detect; recognize .pyc and .py extensions - lp:743881
+	+ merged branch lp:~asac/ntrack/lp743881
+	+ reported by arekm as needed for http://www.pld-linux.org
+
+2011-03-28  Alexander Sack  <asac@jwsdot.com>
+
+	build: improve H2DEF detect; recognize .pyc and .py extensions - lp:743881
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 014 development
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	Release 013
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS for 012 release
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix fail to build on 64-bit caused by wrong printf formatting of pointer value - lp:743636
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 013 development
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	Release 012
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS for 012 release
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	README: add "Example Code" section; refer to */test/mtest-*.c
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	README: refresh and improve README content
+	
+	* document requirements for all modules/binding by referring to PKG_CHECK_MODULES line
+	* add Modules: requirements section;, move libnl there and add recently added libnl2 option
+	* explain developer build in Getting Started section
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: fix python tests trying to be run if gobject but not pygobject dev files on system - lp:694823
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	build: fix build fail if gobject support is available, but pygobject isn't - lp:694823
+	
+	* honor ac_have_pygobject and don't set H2DEF and PYG_CODEGEN for those cases
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix crashes due to bad refcounting code in ntrackmonitor.c
+	
+	* rename global static field monitor to global_monitor to avoid name overloading in _get and _put
+	* add refc check to put and an additional assert to ensure its not called with bad value
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix listener_packs and callback memory and lifecycle management in ntrackmonitor.c
+	
+	* don't forget all listener packs when the buffer has to be increased in ntrack_monitor_register
+	* remove memleak by properly remove all monitor callbacks in __free
+	* fix listener packs memleak in __free
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	glib: fix memleak in monitor refcounting in ntrack-gsource.c
+	* remember source->monitor from ntrack_g_source_new to only acquire one ref
+	to monitor for whole NTrackGSource life; stop getting new refs in __ntrack_g_source_check
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	glib: clean up reference handling in ntrack-gsource.c:ntrack_glib_get_state
+	
+	* properly get and put monitor reference for getting ntrack state from monitor
+
+2011-03-27  Alexander Sack  <asac@jwsdot.com>
+
+	modules: abandon libnl2 1.99 API in favour of final 2.0 API - lp:736058
+	
+	* This BREAKS builds with ubuntu maverick, natty and debian squeeze
+	* simply revert this patch if you build for those non-final API versions
+
+2010-12-26  Alexander Sack  <asac@jwsdot.com>
+
+	modules: move ntrack-libnl.c to new plugin API - lp:694477
+
+2010-12-26  Alexander Sack  <asac@jwsdot.com>
+
+	common: factor module plugin API into a func table and intro macro NTRACK_MODULE_DEFINE - lp:694477
+
+2010-12-23  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 012 development
+
+2010-12-23  Alexander Sack  <asac@jwsdot.com>
+
+	Release 011
+
+2010-12-23  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS for 011 release
+
+2010-12-23  Alexander Sack  <asac@jwsdot.com>
+
+	merge fix for lp:693500: make distcheck fails on hardy - lp:~asac/ntrack/lp693500
+
+2010-12-23  Alexander Sack  <asac@linaro.org>
+
+	BUILD: use --enable-developer-build to fix make distcheck for hardy
+
+2010-12-23  Alexander Sack  <asac@linaro.org>
+
+	common: search dev source tree for modules #ifdef DEVELOPER_BUILD; stop misusing MAINTAINER_MODE for that
+
+2010-12-23  Alexander Sack  <asac@linaro.org>
+
+	BUILD: add --enable-developer-build configure option; do a AC_DEFINE for DEVELOPER_BUILD if enabled; default is off
+
+2010-12-23  Alexander Sack  <asac@linaro.org>
+
+	BUILD: ship autogen.sh in release tarballs
+
+2010-12-23  Alexander Sack  <asac@linaro.org>
+
+	gobject: improve test-gmonitor-recycle.c by testing two life-cycles in one run
+
+2010-12-22  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: improve test-gmonitor-recycle.c by testing two life-cycles in one run
+
+2010-12-22  Alexander Sack  <asac@jwsdot.com>
+
+	merge fix for lp:693214: ntrack hardy build and runtime issues from lp:~asac/ntrack/lp693214
+
+2010-12-22  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: properly recycle _singleton.ptr; unset it in finalized and reset initialized variable
+
+2010-12-22  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: explicitly link test binary against ../../glib/libntrack-glib.la to keep hardy linker happy for binaries within source tree
+
+2010-12-22  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: relax libntrack_gobject_la_CFLAGS to -Wno-error on warnings in generated ntrack-gmarshal.h
+
+2010-12-22  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: fix hardy gcc-4.2 strict-aliasing warning about _singleton cast; use a union
+
+2010-12-22  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: use union in gmonitor-recycle test to avoid strict-aliasing warning for hardy gcc-4.2
+
+2010-12-22  Alexander Sack  <asac@jwsdot.com>
+
+	BUILD: add AC_SUBST for PYG_CODEGEN and H2DEF to support bot, pygobject-2.0 and pygtk-20 for hardy
+
+2010-12-22  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: handreplace ENUMPREFIX to fix glib-mkenums in hardy and older
+
+2010-12-22  Alexander Sack  <asac@jwsdot.com>
+
+	BUILD: eliminate NULL and set AM_LDFLAGS everywhere to unbreak old autoreconfs - lp:693215
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 011 development
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	Release 010
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS for 010 release
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: ship a python wrapper as mtest-gmonitor-py as part of check_PROGRAMS
+	- introduce a convenience -py wrapper that sets PYTHONPATH properly for in-source builds
+	- final fix for lp:692703
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	BUILD: enable maintainer mode by default so make dist doesnt fail
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: add license for gobject/pyntrack-module.c
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: explicitly link tests against libntrack.la since they now use ntrack_init directly
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	glib: explicitly link tests against libntrack.la since they now use ntrack_init directly
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	common: enable MAINTAINER_MODE define in common/Makefile.am for ntrack.c
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: extend python monitor test to make use of ntrack_init
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	object: rename pyntrack-module exception type to NtrackException
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: add a wrapped ntrack_init func to pyntrack module that sys.argv as argument
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	modules: link ntrack-libnl1.la and ntrack-libnl2.la against ../common/libntrack.la to make python module loader happy
+
+2010-12-21  Alexander Sack  <asac@jwsdot.com>
+
+	modules: drop trailing / from ntrackmodulesdir definition
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	BUILD: build modules/ after common/ source and allow modules/ to depend on common/
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: make test use QNtrack::init
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: add QNtrack::init as wrapper for ntrack_init to API
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: make tests use ntrack_init
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	glib: make tests use ntrack_init
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	common: make tests use ntrack_init
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	glib: add license to recyle test
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	BUILD: enable AM_MAINTAINER_MODE automake feature in configure.ac
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	common: add ntrack_init function to ntrackbase.h that adds a couple of potential in-source locations to the backend search list iif in MAINTAINER_MODE
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix modules not looked for in MODULES_DIR; the plugin search loop iterator got accidentially bumped twice in one loop run
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: update copyright for 2010 modifications in gobject
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	common: update copyright for 2010 modifications in common/test
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	common: update copyright for 2010 modifications in common/
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	common: update NTRACK_LT_VERSION = 3:3:3 for libntraakc.so
+	
+	API additions: ntrack_monitor_put
+	API removal: -
+	API change: -
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	common: use GCC visibile pragma to hide private functions from common/ntrackarch.h
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	common: rename private ntrack-arch.h => ntrackarch.h
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	common: consider build-tree modules/ directory before MODULES_DIR for typical ntrack tests
+	
+	+ Also beautify backend loader loggging a bit in common/ntrack.c
+
+2010-12-20  Alexander Sack  <asac@jwsdot.com>
+
+	modules: create top level modules/ source directory and move ntrack-libnl.c there
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: trigger rebuild of libntrack.la if ntrackarchapi.h changes
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: first step towards public plugain api; factor backend API to separate header: ntrackarchapi.h, see lp:692327
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: drop ntrack_monitor_arch_event_f typdef from private ntrack-arch.h; its identical with ntrack_monitor_callback_f from public api
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: add ntrack-arch.h to libntrack_la_SOURCES
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: build ntrack-libnl.c as ntrack-libnl1.la and ntrack-libnl1.la modules - lp:692245
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: use plugin delegate functions in ntrackmonitor.c
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: add backend plugin code to ntrack.c and introduce glue functions for ntrack-arch.h API
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: add support for libnl-2.0 and use by default; keep compile time fallback support for libnl-1 - lp:686554
+	+ add support for HAVE_LIBNL1 and HAVE_LIBNL2 to configure and autoheaders
+	+ introduce macros for NL_CACHE_MNGR_ALLOC NL_CACHE_MNGR_ADD, NL_PRINT_ERROR and RTNL_ROUTE_GET_PRIO to abstract from libnl1/2 api changes
+	+ introduce typedef for NTRACK_nl_handle that abstracts from nl_handle (libnl1) vs. nl_sock (libnl2)
+	+ allocate nl_handle for HAVE_LIBNL1 and nl_sock for HAVE_LIBNL2 in libnl backend init
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: code cleanup and indent in setup_smart_handle of libnl backend
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: start using nl cache mngr for main handle as well; eliminate cache refills
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: remove unused/commented code in ntrack-libnl.c
+
+2010-12-19  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix how we set binary_addr for dst_filter; also set prefixlen on dst_filter
+
+2010-10-16  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: use pyntrack-gmonitor.override from $(srcdir) to fix failure when building in build/ dir - lp:661769
+
+2010-10-10  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 010 development
+
+2010-10-10  Alexander Sack  <asac@jwsdot.com>
+
+	Release 009
+
+2010-10-10  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS for 009 release
+
+2010-10-10  Alexander Sack  <asac@jwsdot.com>
+
+	common[test]: add license and indent boilderplate for recyle test
+
+2010-10-10  Alexander Sack  <asac@jwsdot.com>
+
+	common[test]: ifx recycle test include to fix build failure in make distcheck
+
+2010-10-08  Alexander Sack  <asac@jwsdot.com>
+
+	add support for moc binary if moc-qt4 is not available - lp:653882
+
+2010-10-03  Alexander Sack  <asac@jwsdot.com>
+
+	gobject[test]: add license header to test-gmonitor-recycle.c test
+
+2010-10-03  Alexander Sack  <asac@jwsdot.com>
+
+	add explicit ./configure flag for with/without-<binding> - see lp:654221
+
+2010-08-10  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: use ntrack_monitor_put to properly unref the monitor in QNtrack destructor
+
+2010-08-10  Alexander Sack  <asac@jwsdot.com>
+
+	gobject[test]: add recycle test that verifies that unrefing a gmonitor works
+
+2010-08-10  Alexander Sack  <asac@jwsdot.com>
+
+	glib: remove forgotten debugging output during gsource finalization
+
+2010-08-10  Alexander Sack  <asac@jwsdot.com>
+
+	glib[test]: add simple gsource recyle (aka lifecycle) test to auto testsuite
+
+2010-08-10  Alexander Sack  <asac@jwsdot.com>
+
+	glib: hook up ntrack monitor refcounting and implement proper gsource lifecycle
+
+2010-08-10  Alexander Sack  <asac@jwsdot.com>
+
+	common[test]: add auto-run recyle test that pokes the monitor and arch refcounting facilities a bit
+
+2010-08-10  Alexander Sack  <asac@jwsdot.com>
+
+	common: introduce refcounting to monitor singleton api; old code is supposed to still work; free arch backend if refc becomes 0
+
+2010-08-10  Alexander Sack  <asac@jwsdot.com>
+
+	common: improve error loggin for nl_connect; factor that code to a helper func
+
+2010-08-03  Alexander Sack  <asac@jwsdot.com>
+
+	common[arch]: extend backend api to require _ntrack_arch_free; implement this in ntrack-libnl.c (lp:612868)
+
+2010-07-29  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: change type of 'state' member in NTrackGMonitorPrivate from ntrack_state_t to NTrackGlibState
+
+2010-07-28  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: add missing G_END_DECLS to ntrack-gmonitor.h - see lp:594794
+
+2010-07-28  Alexander Sack  <asac@jwsdot.com>
+
+	common: add missing NTRACK_END_DECLS to ntracklist.h - lp:594794
+
+2010-07-28  Alexander Sack  <asac@jwsdot.com>
+
+	add 2010 to copyright years mentioned in README license header
+
+2010-07-28  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 009 development
+
+2010-07-28  Alexander Sack  <asac@jwsdot.com>
+
+	Release 008
+
+2010-07-28  Alexander Sack  <asac@jwsdot.com>
+
+	bump ntrack version to 008
+
+2010-07-22  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: add include guards to QNtrack.h - debbugs:589341 lp:608630
+
+2010-07-22  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: don't define func parameter names for QNtrackListener slots to
+	> to avoid warnings of unused variables; thx to Sune Vuorela for the bug and guidance
+
+2010-04-15  Alexander Sack  <asac@jwsdot.com>
+
+	Release 007
+
+2010-04-10  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: include ntrack-glib.h rather than ntrackbase.h by default in ntrack-monitor.h
+	
+	This ensures that all the glib symbols and types are available to ntrack-gobject consumers
+
+2010-04-03  Alexander Sack  <asac@ubuntu.com>
+
+	add more built files to .bzrignore
+
+2010-02-22  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: do not pass redundant GLIB_CFLAGS and GLIB_LIBS to compiler/linker
+
+2010-02-22  Alexander Sack  <asac@jwsdot.com>
+
+	glib: do not unnecessarily link against GOBJECT_LIBS
+
+2010-02-22  Alexander Sack  <asac@jwsdot.com>
+
+	ensure that any backend is build
+	
+	For now this means: make configure fail if ! test ac_have_libnl = 1.
+
+2010-02-22  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 007 development
+
+2010-02-21  Alexander Sack  <asac@jwsdot.com>
+
+	Release ntrack 006
+
+2010-02-21  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS for 006 release
+
+2010-02-21  Alexander Sack  <asac@jwsdot.com>
+
+	common: install ntrackbase.h in pkgcommonincludedir
+
+2010-02-21  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 006 development
+
+2010-02-21  Alexander Sack  <asac@jwsdot.com>
+
+	Release ntrack 005
+
+2010-02-21  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS for 005 release
+
+2010-02-21  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: remove some empty lines between QNtrack private fields
+
+2010-02-21  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: fix memleak in get_nl_link_by_index
+
+2010-02-21  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: build qt4/ dir with -pedantic and -Wall -Werror; make QtCore includedir -isystem
+
+2010-02-21  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: bump SONAME version-info to 1:0:0 to reflect API changes
+
+2010-02-13  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: rename getters to match qt nomenclature
+	
+	+ singleton getInstance() becomes instance()
+	+ getState() becomes networkState()
+
+2010-02-12  Alexander Sack  <asac@jwsdot.com>
+
+	glib: fix indentation of function parameters in ntrack-gsource.h
+
+2010-02-12  Alexander Sack  <asac@jwsdot.com>
+
+	glib: fix indentation of function parameters in ntrack-gsource.c
+
+2010-02-12  Alexander Sack  <asac@jwsdot.com>
+
+	common: honor link/carrier state when considering a topmost_route candidate (lp:512094)
+	
+	Improve update_connectivity logic maintained in ntrack-libnl.c as below:
+	1. fill a sorted list with nl_objects taken from current nl link_cache
+	2. when iterating through default routes, we only consider routes that have a matching
+	output interface (oif) in the link cache
+	3. a new topmost_route candidate is only considered if it has a carrier
+	4. after all clear the sorted link_list
+
+2010-02-12  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix processing of last element in ntrack_list_foreach,
+
+2010-02-12  Alexander Sack  <asac@jwsdot.com>
+
+	common: add ntrack_list_free function to list api
+
+2010-02-09  Alexander Sack  <asac@jwsdot.com>
+
+	common[test]: extend common test-ntracklist to cover ntrack_list_foreach func
+
+2010-02-09  Alexander Sack  <asac@jwsdot.com>
+
+	common: add ntrack_list_foreach to ntracklist api
+
+2010-01-21  Alexander Sack  <asac@jwsdot.com>
+
+	common[libnl]: emit op_default_route_disappeared if no topmost_route is found in first update_connectivity run
+	
+	Currently, stateful monitor implementatoins start in state UNKNOWN, because they are not informed if no topmost_route
+	is ever found. this fix allows them to interpret this as OFFLINE
+
+2010-01-17  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 005 development
+
+2010-01-11  Alexander Sack  <asac@jwsdot.com>
+
+	Release ntrack 004
+
+2010-01-11  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS file for 004 release
+
+2010-01-11  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix typo in .pc.in file
+
+2010-01-11  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: fix typo in .pc.in file
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	common: export all ntrack_* symbols in ntrack.symbols rather than a manual list
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	glib: bump libntrack-glib soname after moving gobject API symbols to standalone library
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: fix distcheck by not refering to glib/ntrack-enums.h in _SOURCES
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	glib: dont ship mtest-gmonitor.py testcase in glib testsuite anymore
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	gobject: add more generated files to CLEANFILES (+ pyntrack-gmonitor.defs, ntrack-gmarshal.h
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	glib/gobject: cut libntrack gobject parts into its own library shipped in gobject/ source tree
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	build: define PYTHON_INCLUDES manually after dropping the AM_PYTHON_CHECK_HEADERS macro usage
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	build: drop (obsolete/removed) AM_CHECK_PYTHON_HEADERS use from configure.ac
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	qt4: rename libntrack-qt.so to libntrack-qt4.so
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	qt/qt4: rename qt/ directory to qt4/
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	glib: ship glib headers in $pkgincludedir/glib and gobject headers in $pkgincludedir/gobject
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	* qt: ship qt4 headers in $(pkgincludedir\)/qt4
+
+2010-01-10  Alexander Sack  <asac@jwsdot.com>
+
+	* common: ship libntrack headers in $(pkgincludedir\)/common
+
+2010-01-06  Alexander Sack  <asac@jwsdot.com>
+
+	glib: define params as enum types for ntrack-event and ntrack-state-changed signal
+	
+	This helps python bindings to choose the proper type for the callback parameters.
+	In turn adjust the marshallers used for callbacks and the marshaller definition
+	list file.
+
+2010-01-06  Alexander Sack  <asac@jwsdot.com>
+
+	glib: export GType accessor symbols for state and event enums 
+
+2010-01-06  Alexander Sack  <asac@jwsdot.com>
+
+	glib[test]: fix Makefile.am syntax for distcheck
+
+2010-01-05  Alexander Sack  <asac@jwsdot.com>
+
+	glib[test]: add simply python gmonitor (pyntrack) test
+
+2010-01-05  Alexander Sack  <asac@jwsdot.com>
+
+	glib: add license info to ntrack-enumtypes.{c,h} templates
+
+2010-01-05  Alexander Sack  <asac@jwsdot.com>
+
+	glib: add code and build infrastructure for pyntrack (gobject) python binding
+
+2010-01-05  Alexander Sack  <asac@jwsdot.com>
+
+	glib: include ntrack-gmarshal.h in dist tarball too
+
+2010-01-05  Alexander Sack  <asac@jwsdot.com>
+
+	glib: generate gtypes for ntrack-enums.h during build using glib-mkenums templating approach
+
+2010-01-05  Alexander Sack  <asac@jwsdot.com>
+
+	glib: redefine ntrack_state_t and ntrack_event_t in glib specific header to prepare for enum gtypes
+
+2010-01-05  Alexander Sack  <asac@jwsdot.com>
+
+	glib: make gobject macros/defines pygobject friendly/consistent
+	
+	NTRACK_TYPE_G_MONITOR -> N_TYPE_TRACK_GMONITOR
+	NTRACK_IS_G_MONITOR -> N_TRACK_GMONITOR
+	NTRACK_G_MONITOR_CLASS -> N_TRACK_GMONITOR_CLASS
+	NTRACK_IS_G_MONITOR_CLASS -> N_TRACK_IS_GMONITOR_CLASS
+	NTRACK_G_MONITOR_GET_CLASS -> N_TRACK_GMONITOR_GET_CLASS
+	__NTRACK_G_MONITOR_H__ -> __NTRACK_GMONITOR_H__
+
+2009-12-13  Alexander Sack  <asac@jwsdot.com>
+
+	common: define explicit values for track_state_t and ntrack_event_t enum types and
+	start with 1; in turn add a *_UNSET constant for state event for the 0 value
+
+2009-11-05  Alexander Sack  <asac@jwsdot.com>
+
+	common: define explicit values for track_state_t and ntrack_event_t enum types
+
+2009-12-13  Alexander Sack  <asac@jwsdot.com>
+
+	configure.ac: add pygobject support and AM_CONDITIONAL
+
+2009-11-05  Alexander Sack  <asac@jwsdot.com>
+
+	add pygobject support and AM_CONDITIONAL to configure.ac
+
+2009-12-13  Alexander Sack  <asac@jwsdot.com>
+
+	glib: move gmonitor private fields from public to a NTrackGMonitorPrivate struct
+
+2009-12-13  Alexander Sack  <asac@jwsdot.com>
+
+	glib: export concrete gmonitor class and object type definitions to pub header
+
+2009-11-05  Alexander Sack  <asac@jwsdot.com>
+
+	glib: export concrete gmonitor class and object type definitions to pub header
+
+2009-12-13  Alexander Sack  <asac@jwsdot.com>
+
+	common: make inline functions static; this allows multiple uses in the same binary
+	without symbol conflicts
+
+2009-11-01  Alexander Sack  <asac@jwsdot.com>
+
+	common: make inline functions static; this allows multiple uses in the same binary
+	without symbol conflicts
+
+2009-12-05  Alexander Sack  <asac@jwsdot.com>
+
+	glib[test]: dump initial state and use ntrack_util_ helper funcs in glib monitor test
+
+2009-12-05  Alexander Sack  <asac@jwsdot.com>
+
+	qt[test]: dump initial state and use ntrack_util_ helper funcs in qt monitor test
+
+2009-11-01  Alexander Sack  <asac@jwsdot.com>
+
+	common[test]: make use of new ntrack_util_ helper functs in monitor test
+
+2009-11-01  Alexander Sack  <asac@jwsdot.com>
+
+	common: add ntrack_util_* API with state and event to ascii inline funcs (lp:466777)
+
+2009-11-01  Alexander Sack  <asac@jwsdot.com>
+
+	qt[test]: add qt test to build system and add mtest-qmonitor test
+
+2009-11-01  Alexander Sack  <asac@jwsdot.com>
+
+	qt: first stab at qt API; implement QNtrack and add QNTrackListener (lp:466779)
+
+2009-10-31  Alexander Sack  <asac@jwsdot.com>
+
+	ship pkg-config (.pc) files for libntrack, libntrack-glib and libntrack-qt (lp:454735)
+
+2009-10-31  Alexander Sack  <asac@jwsdot.com>
+
+	qt: rename library: libqntrack -> libntrack-qt
+
+2009-10-26  Alexander Sack  <asac@jwsdot.com>
+
+	glib: fix ntrack-gmarshal.h generation for real; add it to BUILT_SOURCES
+
+2009-10-26  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 004 development
+
+2009-10-25  Alexander Sack  <asac@jwsdot.com>
+
+	Release ntrack 003
+
+2009-10-25  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS for 003 release
+
+2009-10-25  Alexander Sack  <asac@jwsdot.com>
+
+	do not echo bzr command to stdout in dump-bzr-changelog: rule
+
+2009-10-25  Alexander Sack  <asac@jwsdot.com>
+
+	glib: ship ntrack-gmarshal.list in dist tarball and ensure that header gets produced during build
+
+2009-10-25  Alexander Sack  <asac@jwsdot.com>
+
+	glib: explicitly export api elements in a symbols file and set initial libtool --version-info to 1:0:1
+
+2009-10-25  Alexander Sack  <asac@jwsdot.com>
+
+	common: explicitly export api elements in a symbols file and set initial libtool --version-info to 1:0:1
+
+2009-10-25  Alexander Sack  <asac@jwsdot.com>
+
+	glib: make gsource related API and internal symbols conform with there type/header name:
+	+ rename all public and internal *ntrack_glib_source_* symbols to *ntrack_g_source_*
+
+2009-10-25  Alexander Sack  <asac@jwsdot.com>
+
+	cleanup enums and type names used for events and states; reuse event types from
+	frontend in backend api (LP: #452229)
+	
+	s/NTRACK_MONITOR_STATE/NTRACK_STATE/g
+	s/NTRACK_MONITOR_EVENT/NTRACK_EVENT/g
+	s/NTRACK_MONITOR_ARCH_EVENT/NTRACK_EVENT/g
+	s/ROUTE_CHANGE/RECONNECT/g
+	s/NTRACK_EVENT_DISCONNECTED/NTRACK_EVENT_DISCONNECT/g
+	s/NTRACK_EVENT_CONNECTED/NTRACK_EVENT_CONNECT/g
+	s/ntrack_monitor_state_t/ntrack_state_t/g
+	s/ntrack_monitor_event_t/ntrack_event_t/g
+	s/ntrack_monitor_arch_event_t/ntrack_event_t/g
+
+2009-10-25  Alexander Sack  <asac@jwsdot.com>
+
+	glib[test]: echo instructions to stdout in gsource and gmonitor test
+
+2009-10-24  Alexander Sack  <asac@jwsdot.com>
+
+	common[test]: add check that initial monitor online state is not UNKNOWN
+
+2009-10-24  Alexander Sack  <asac@jwsdot.com>
+
+	common: don't overwrite monitor online state after arch backend was initialized (LP: #454885)
+
+2009-10-21  Alexander Sack  <asac@jwsdot.com>
+
+	common[test]: extend monitor test to dump initial state before entering event loop
+
+2009-10-21  Alexander Sack  <asac@jwsdot.com>
+
+	glib: fix ntrack-gmarshal.h generation - move it to automake nodist_ SOURCES
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib: fix ids used in gmonitor to emit ntrack signals
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib[test]: add ntrack-event and ntrack-state-changed signal handling to mtest-gmonitor test case
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib: internalize ntrack_cclosure_marshal_* symbols
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib[test]: land mtest-gmonitor test with basic singleton and ref/unref checks
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib: implement NTrackGMonitor gsource callback; emit ntrack-event and ntrack-state-changed signals as needed
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib: bind NTrackGMonitor to a NTrackGSource
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib: fix code indentation in ntrack-gmonitor.c
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib: add ntrack-event and ntrack-state-changed signals to NTrackGMonitor
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib: add first batch of ntrack cclosure_marshal'ers and generate code during build
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	Don't use '_' in any source or binary filename; use '-' instead
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib: move gsource code to ntrack-gsource.h,c and ship meta headers for glib and gobject
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib: add stub-code for NTrackGMonitor to start on ntrack gobject API
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	start ntrack 003 development
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	Release ntrack 002
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix old ntrack_macros.h reference in Makefile.am to unbreak distcheck
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	update NEWS with 002 release info
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	test _get_state functions for common and glib API
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	install all public common, qt and glib API headers
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	common: unify names of header files in common C-API
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	common: move ntrackpointer type definition to ntrackbase.h
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	common: do not include public ntrack.h in common/ source and headers
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	glib: reuse "common/" event and state typedefs rather than keeping redundant copies
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	rename func ntrack_get_monitor to ntrack_monitor_get as its a ntrack_monitor API element
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	common: make libntrack a top level shared lib
+
+2009-10-18  Alexander Sack  <asac@jwsdot.com>
+
+	common: cleanup monitor API: move a few typedefs to new ntrackbase.h
+
+2009-10-17  Alexander Sack  <asac@jwsdot.com>
+
+	Do not use CamelCase type definitions in common C-API
+
+2009-10-17  Alexander Sack  <asac@jwsdot.com>
+
+	qt: fix CLEANFILES and syntax used by moc generation code for BSD
+
+2009-10-17  Alexander Sack  <asac@jwsdot.com>
+
+	glib: rename libgntrack to libntrack-glib
+	
+	adjust all symbol names in glib/ and glib/test/
+	accordingly and rename the source files gntrack.c
+	and gntrack.h to ntrack-glib.c ntrack-glib.h;
+	in same spirit fix the Makefile.am' in glib/ subtree
+
+2009-10-17  Alexander Sack  <asac@jwsdot.com>
+
+	qt: keep things simple: get rid of generic moc_ rule to avoid GNU/BSD... issues
+
+2009-10-16  Alexander Sack  <asac@jwsdot.com>
+
+	qt: use qualified moc-qt4 commanD instead of "moc" - fixes freebsd build
+
+2009-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	remove not-needed parts from configure.ac that were copied from GNU examples
+
+2009-10-15  asac  <asac@netbsd-vm1>
+
+	remove various standard macro calls from configure.ac that were copied from examples
+
+2009-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	qt: fix moc build-rule for BSD make
+
+2009-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	add m4/ directory, define CHECK_GNU_MAKE and make qt/ moc rule gnu/bsd ready
+
+2009-10-15  asac  <asac@netbsd-vm1>
+
+	add m4/ directory, define CHECK_GNU_MAKE and make qt/ moc rule gnu/bsd ready
+
+2009-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	common: do not use error.h & friends, which does not work on xBSD
+
+2009-10-15  asac  <asac@netbsd-vm1>
+
+	common: do not use error.h and friends as that does not work on xBSD
+
+2009-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	make libnl dependency optional in configure.ac
+
+2009-10-15  asac  <asac@netbsd-vm1>
+
+	make libnl dependency optional in configure.ac
+
+2009-10-15  Alexander Sack  <asac@jwsdot.com>
+
+	glib[test]: improve mainloop integration and error code handling for gsource test
+
+2009-10-12  Alexander Sack  <asac@jwsdot.com>
+
+	common: clearing libnl caches before refill makes no sense; don't do that
+
+2009-10-12  Alexander Sack  <asac@jwsdot.com>
+
+	glib: add glib test to build and make a manual echo test for ntrack's gsource (lp:448355)
+
+2009-10-12  Alexander Sack  <asac@jwsdot.com>
+
+	glib: fix missing ligntrack.la dependency on libntrack.la
+
+2009-10-12  Alexander Sack  <asac@jwsdot.com>
+
+	glib: first code drop of a GSource for ntrack (lp:448350) and implement get_state accessor (lp:448360)
+
+2009-10-11  Alexander Sack  <asac@jwsdot.com>
+
+	common: #include all API headers in ntrack.h
+
+2009-10-11  Alexander Sack  <asac@jwsdot.com>
+
+	glib: land new main loop integration approach: provide a GSource processing ntrackmonitor events
+
+2009-10-11  Alexander Sack  <asac@jwsdot.com>
+
+	glib: make common lib headers visible for glib wrapper
+
+2009-10-11  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix comment in ntrackmonitor.h
+
+2009-10-11  Alexander Sack  <asac@jwsdot.com>
+
+	common: also move ntrack_monitor_ code to its own C file
+
+2009-10-11  Alexander Sack  <asac@jwsdot.com>
+
+	common: move ntrack_monitor declaration to its own header file
+
+2009-10-11  Alexander Sack  <asac@jwsdot.com>
+
+	common: implement aggregated state tracking/caching for NTrackMonitor API
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	start ntrack 002 development
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	Release ntrack 001
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	build: add dump-bzr-changelog makerule and remove ChangeLog creation in autogen.sh
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	common[test]: fix relative include in AM_CFLAGS for distcheck builds
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	Ship AUTHORS NEWS README as dist_doc_DATA in binary installs
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	Use three digit version scheme for ntrack
+	
+	First release version will be 001
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	Add "Getting Started" section to README
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	license: fix all code license headers to match our real license: LGPLv3 (or later)
+	
+	All code headers were refering to GPLv3 (or later); that was a copy/paste
+	mistake by me and we shipped COPYING + COPYING.LESSER on top level all the
+	time.
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	README: add build requirements (Linux) and adjust contact info
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	glib: make compiler pickier with: -Wall -Werror -pedantic
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	glib: first serious API skeleton with State and Event enums
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	common[test]: add ntrackidpool test
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	common: bring ntrackidpool in a usable state - fix API and impl
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	common: extend ntracklist api by _insert_sorted_unique function
+
+2009-10-10  Alexander Sack  <asac@ubuntu.com>
+
+	common: raise NTracklist from ashes and improve test
+	
+	Rewrite most parts of ntracklist and fix broken _remove
+	function signature in API.
+	
+	This rewrites makes a ring out of the list to allow fast
+	lookup of last element; also the makes the operations
+	better generalizable.
+
+2009-10-09  Alexander Sack  <asac@ubuntu.com>
+
+	common: add ntrackidpool api and implementation
+
+2009-10-04  Alexander Sack  <asac@jwsdot.com>
+
+	common[test]: implement monitor event callback for mtest_monitor
+
+2009-10-04  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix ntrack_monitor_register: increment pack_len
+
+2009-10-04  Alexander Sack  <asac@jwsdot.com>
+
+	common: translate backend events for frontend API and dispatch to listeners
+
+2009-10-04  Alexander Sack  <asac@jwsdot.com>
+
+	common: device NTrackMonitorEvent and refine callback signature for frontend API
+
+2009-10-04  Alexander Sack  <asac@jwsdot.com>
+
+	common[test]: fix compiler warnings
+
+2009-10-04  Alexander Sack  <asac@jwsdot.com>
+
+	common: -pedantic-errors is broken for sys headers; use -Wall -Werror -pedantic
+	
+	... and fix code triggering compiler errors with the new flags
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: build with -pedantic-errors
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common[test]: fix compiler warnings in test_ntracklist.c
+
+2009-10-04  Alexander Sack  <asac@jwsdot.com>
+
+	common: fix typo in DISCONNECTED printf
+
+2009-10-04  Alexander Sack  <asac@jwsdot.com>
+
+	common: connect libnl event callback with abstract monitor
+
+2009-10-04  Alexander Sack  <asac@jwsdot.com>
+
+	common: remove redundant libnl code from update_caches and setup_main_handle
+
+2009-10-04  Alexander Sack  <asac@jwsdot.com>
+
+	common: prepare libnl backend for NTrackMonitorArchEventFunc callback emission
+
+2009-10-04  Alexander Sack  <asac@jwsdot.com>
+
+	common: add NTrackMonitorArchEvent callback to backend API; adjust ntrack_libnl accordingly
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common[test]: add current test  binaries to .bzrignore
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common[test]: fix compiler warnings in mtest_monitor.c
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: use OBJ_CAST to stop compile warnings in libnl backend
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: silence update_caches stdoutput
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: fix two leaky code paths in libnl update_connectivity
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common[test]: add first revision of ntrack monitor test (manual)
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: fix refcounting when topmost_route has changed in update_connectivity
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: NULL define topmost_route in update_connectivity
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: update caches and connectivity at end of libnl constructor
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: use __new constructor for backend API rather than __init
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: allow NTrackMonitorArch to inherit the abstract NTrackMonitor 
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: make frontend ntrack_arch_process_data signature to match backend API
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common[test]: prepare common for make check and add first test for ntracklist
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	glib: rename defines to use G_NTRACK (not NETBREATH)
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: properly initialize NTrackMonitor struct in ntrack_get_monitor
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: add initial libnl based ntrack backend for linux
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: declare arch instance struct: NTrackMonitorArch
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: fix headers to not redeclare names if included twice
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: add ntrackcompare.h, define direct_ompare and move compare func typedef there
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: add minimalistic list implementation with sorted insertion feature
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: move type definition for ntrackpointer to ntrack_macros.h
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: remove use of glib functions/macros in common/
+
+2009-10-04  Alexander Sack  <asac@ubuntu.com>
+
+	common: refine ntrack api and add support for arch dependent implementations
+
+2009-09-30  Alexander Sack  <asac@ubuntu.com>
+
+	common: add macros for TRUE and FALSE if not defined
+
+2009-09-30  Alexander Sack  <asac@ubuntu.com>
+
+	build: prepare build system for libnl-1 backend; introduce HAVE_LIBNL conditional
+	in configure.ac and add LIBNL_CFLAGS and LIBNL_LIBS
+
+2009-08-31  Alexander Sack  <asac@ubuntu.com>
+
+	add basic .bzrignore
+
+2009-08-16  Alexander Sack  <asac@jwsdot.com>
+
+	qt/ build: link against common/libntrack.la
+
+2009-08-16  Alexander Sack  <asac@jwsdot.com>
+
+	qt/ buildsystem: - fix for ||clean::|| target not removing generated .moc
+	files: make CLEANFILES to properly refer to nodist_libqntrack.la
+
+2009-08-16  Alexander Sack  <asac@jwsdot.com>
+
+	common: make libntrack a noinst (install) libtool library to play nicely with
+	the top level libtool libraries gtk/ qt/
+
+2009-08-16  Alexander Sack  <asac@jwsdot.com>
+
+	initial source with licensing, README, AUTHORS, build system and common/, gtk/
+	and qt/ skels
+

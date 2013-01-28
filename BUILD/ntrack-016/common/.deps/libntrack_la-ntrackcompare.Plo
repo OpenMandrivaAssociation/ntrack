@@ -1,0 +1,6 @@
+libntrack_la-ntrackcompare.lo: ntrackcompare.c ntrackbase.h \
+ ntrackmacros.h
+
+ntrackbase.h:
+
+ntrackmacros.h:

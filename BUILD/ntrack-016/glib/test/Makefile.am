@@ -1,0 +1,47 @@
+#
+#  Copyright (C) 2009,2010  Alexander Sack <asac@jwsdot.com>
+#
+#  This file is part of:
+#      ntrack - Network Status Tracking for Desktop Applications
+#               http://launchpad.net/ntrack
+#
+#   ntrack is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   ntrack is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with ntrack.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+EXTRA_DIST =
+
+test_libs = \
+	$(GLIB_LIBS) \
+	../libntrack-glib.la \
+	../../common/libntrack.la
+
+AM_CFLAGS = \
+	-Wall \
+	-I$(srcdir)/.. \
+	-I$(srcdir)/../../common \
+	$(GLIB_CFLAGS)
+
+check_PROGRAMS = \
+	test-gsource-recycle \
+	mtest-gsource
+
+test_gsource_recycle_SOURCES = test-gsource-recycle.c
+test_gsource_recycle_LDADD = $(test_libs)
+
+mtest_gsource_SOURCES = mtest-gsource.c
+mtest_gsource_LDADD = $(test_libs)
+
+TESTS = \
+	test-gsource-recycle
+

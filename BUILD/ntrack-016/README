@@ -1,0 +1,134 @@
+
+  ntrack - Network Status Tracking made easy for Desktop Applications
+
+Licensing
+===========
+
+    Copyright 2009-2011  - Alexander Sack <asac@jwsdot.com>
+
+    ntrack is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    ntrack is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with ntrack.  If not, see <http://www.gnu.org/licenses/>.
+
+    Full license text available in COPYING and COPYING.LESSER
+
+
+Project/Contact Info
+======================
+
+   Project-Home:  http://launchpad.net/ntrack
+   Bug-Tracker:   http://bugs.launchpad.net/ntrack
+   Email:         primary: asac@jwsdot.com (primary)
+                  backups: asac@ubuntu.com, asac@debian.org or asacasa@gmail.com
+
+
+Requirements - Linux
+=====================
+
+Common:
+  * gcc/ld, etc.
+  * autotools
+  * libc
+
+Modules:
+  * libnl: PKG_CHECK_MODULES(LIBNL1, libnl-1, 
+  * libnl2: PKG_CHECK_MODULES(LIBNL2, libnl-2.0, ...
+  * libnl3: PKG_CHECK_MODULES(LIBNL3, libnl-3.0 = 3.0, ...
+  * libnl3.1: PKG_CHECK_MODULES(LIBNL3_1, libnl-route-3.1, ...
+  * libnl3.x: PKG_CHECK_MODULES(LIBNL3_X, libnl-route-3.0 > 3.1, ...
+  * rtnetlink: AC_CHECK_HEADER(linux/netlink.h, ...
+
+Binding:
+  * qt4: PKG_CHECK_MODULES(QTCORE, QtCore,...
+  * glib: PKG_CHECK_MODULES(GLIB, glib-2.0,...
+  * gobject: PKG_CHECK_MODULES(GOBJECT, gobject-2.0,...
+  * pygobject: PKG_CHECK_MODULES(PYGOBJECT, pygobject-2.0,...
+    or pygtk (older systems): PKG_CHECK_MODULES(PYGOBJECT, pygtk-2.0,...
+
+
+Getting Started (Developer Build)
+==================================
+
+Developer build searches for modules in various source places
+
+	1. Configure the source tree:
+	   (Note: run ./configure --help for options)
+		$ mkdir build/
+		$ ../configure --enable-developer-build
+
+	2. Build the sources
+		$ make
+
+	3. Build tests and run automated tests
+		$ make check
+
+	4. Run the example net monitor
+		$ ./common/test/mtest_monitor
+
+	5. Submit patches \o/
+
+
+Selecting Backend Module (Build)
+=================================
+
+Make requirements mentioned in "Modules" section above
+available and configure your source tree like:
+
+	$ mkdir build/
+	$ ../configure
+
+This will build the default backend (see ../configure --help
+for up to date documentation what is the default). As of ntrack
+015 it was:
+
+	--enable-backend=[ARGS] select one or more backends
+	                        from: libnl and rtnetlink
+	                        [default=libnl]
+
+You can select one or many backends to build through the
+--enable-backend=... configure switch. In this sense
+
+	$ ../configure --enable-backend=libnl
+
+will build libnl backends. Remember that libnl can produce
+multiple backend binaries if more than one libnl version .pc
+file can be found. To build rtnetlink backend only, use
+
+	$ ../configure --enable-backend=rtnetlink
+
+to build both, provide a comma separated list:
+
+	$ ../configure --enable-backend=libnl,rtnetlink
+
+When building multiple backends, remember to read the runtime
+selection info in the section below.
+
+
+Selecting Backend Module (Runtime)
+===================================
+
+For now, ntrack does not implement a mean to prioritize
+or select a module explicitly. The implemented strategy
+will attempt to load all backends found in random order
+and use the first backend that can be dlopen'ed.
+
+
+Example Code
+=============
+
+There is at least one mtest that shows how to react on network state for each of the available bindings:
+
+ * common/test/mtest-monitor.c - example for plain C with its own mainloop
+ * glib/test/mtest-gsource.c - example for glib binding using a GSource derivate; hooks up into glib mainloop
+ * gobject/test/mtest-gobject.c - example of gobject binding using a monitor object with signals
+ * qt4/test/mtest-qmonitor.c - example of qtcore binding reusing qt4 mainloop
+

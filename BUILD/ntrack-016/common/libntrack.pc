@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib64
+includedir=/usr/include
+pkgincludedir=${includedir}/ntrack
+commonpkgincludedir=${pkgincludedir}/common
+
+Name: libntrack
+Description: common ntrack library
+Version: 016
+Cflags: -I${commonpkgincludedir}
+Libs: -L${libdir} -lntrack
+

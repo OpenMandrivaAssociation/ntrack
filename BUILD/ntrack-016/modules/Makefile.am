@@ -1,0 +1,106 @@
+#
+#  Copyright (C) 2009-2011  Alexander Sack <asac@jwsdot.com>
+#
+#  This file is part of:
+#      ntrack - Network Status Tracking for Desktop Applications
+#               http://launchpad.net/ntrack
+#
+#   ntrack is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU Lesser General Public License as
+#   published by the Free Software Foundation, either version 3 of
+#   the License, or (at your option) any later version.
+#
+#   ntrack is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU Lesser General Public License for more details.
+#
+#   You should have received a copy of the GNU Lesser General Public
+#   License along with ntrack.  If not, see <http://www.gnu.org/licenses/>.
+#
+NTRACK_LT_VERSION = 2:0:2
+
+ntrackmodulesdir = $(pkglibdir)/modules
+
+AM_CFLAGS = \
+	-Wall \
+	-Wno-variadic-macros \
+	-I$(top_srcdir)/common/
+
+AM_LDFLAGS =
+
+if HAVE_LIBNL1
+LIBNL1_DEF = -DHAVE_LIBNL1
+NTRACK_LIB1 = ntrack-libnl1.la
+endif
+if HAVE_LIBNL2
+LIBNL2_DEF = -DHAVE_LIBNL2
+NTRACK_LIB2 = ntrack-libnl2.la
+endif
+if HAVE_LIBNL3
+LIBNL3_DEF = -DHAVE_LIBNL3
+NTRACK_LIB3 = ntrack-libnl3.la
+endif
+if HAVE_LIBNL3_1
+LIBNL3_1_DEF = -DHAVE_LIBNL3_1
+NTRACK_LIB3_1 = ntrack-libnl3_1.la
+endif
+if HAVE_LIBNL3_X
+LIBNL3_X_DEF = -DHAVE_LIBNL3_X
+NTRACK_LIB3_X = ntrack-libnl3_x.la
+endif
+if HAVE_MODULE_RTNETLINK
+NTRACK_LIB4 = ntrack-rtnetlink.la
+endif
+
+ntrackmodules_LTLIBRARIES = $(NTRACK_LIB1) $(NTRACK_LIB2) $(NTRACK_LIB3) $(NTRACK_LIB3_1) $(NTRACK_LIB3_X) $(NTRACK_LIB4)
+
+ntrack_libnl_sources = \
+	ntrack-libnl.c \
+	$(top_srcdir)/common/ntrackarchapi.h
+ntrack_libnl_cflags = $(AM_CFLAGS)
+ntrack_libnl_libadd = ../common/libntrack.la
+ntrack_libnl_ldflags = -module -avoid-version
+
+if HAVE_LIBNL1
+ntrack_libnl1_la_SOURCES = $(ntrack_libnl_sources)
+ntrack_libnl1_la_CFLAGS = $(LIBNL1_CFLAGS) $(LIBNL1_DEF) $(ntrack_libnl_cflags)
+ntrack_libnl1_la_LIBADD = $(LIBNL1_LIBS) $(ntrack_libnl_libadd)
+ntrack_libnl1_la_LDFLAGS = $(ntrack_libnl_ldflags)
+endif
+
+if HAVE_LIBNL2
+ntrack_libnl2_la_SOURCES = $(ntrack_libnl_sources)
+ntrack_libnl2_la_CFLAGS = $(LIBNL2_CFLAGS) $(LIBNL2_DEF) $(ntrack_libnl_cflags)
+ntrack_libnl2_la_LIBADD = $(LIBNL2_LIBS) $(ntrack_libnl_libadd)
+ntrack_libnl2_la_LDFLAGS = $(ntrack_libnl_ldflags)
+endif
+
+if HAVE_LIBNL3
+ntrack_libnl3_la_SOURCES = $(ntrack_libnl_sources)
+ntrack_libnl3_la_CFLAGS = $(LIBNL3_CFLAGS) $(LIBNL3_DEF) $(ntrack_libnl_cflags)
+ntrack_libnl3_la_LIBADD = $(LIBNL3_LIBS) $(ntrack_libnl_libadd)
+ntrack_libnl3_la_LDFLAGS = $(ntrack_libnl_ldflags)
+endif
+
+if HAVE_LIBNL3_1
+ntrack_libnl3_1_la_SOURCES = $(ntrack_libnl_sources)
+ntrack_libnl3_1_la_CFLAGS = $(LIBNL3_1_CFLAGS) $(LIBNL3_1_DEF) $(ntrack_libnl_cflags)
+ntrack_libnl3_1_la_LIBADD = $(LIBNL3_1_LIBS) $(ntrack_libnl_libadd)
+ntrack_libnl3_1_la_LDFLAGS = $(ntrack_libnl_ldflags)
+endif
+
+if HAVE_LIBNL3_X
+ntrack_libnl3_x_la_SOURCES = $(ntrack_libnl_sources)
+ntrack_libnl3_x_la_CFLAGS = $(LIBNL3_X_CFLAGS) $(LIBNL3_X_DEF) $(ntrack_libnl_cflags)
+ntrack_libnl3_x_la_LIBADD = $(LIBNL3_X_LIBS) $(ntrack_libnl_libadd)
+ntrack_libnl3_x_la_LDFLAGS = $(ntrack_libnl_ldflags)
+endif
+
+if HAVE_MODULE_RTNETLINK
+ntrack_rtnetlink_la_SOURCES = ntrack-rtnetlink.c
+ntrack_rtnetlink_la_CFLAGS =  $(AM_CFLAGS)
+ntrack_rtnetlink_la_LIBADD = $(ntrack_libnl_libadd)
+ntrack_rtnetlink_la_LDFLAGS = -module -avoid-version
+endif 
+

@@ -1,0 +1,13 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+pkgincludedir=${includedir}/ntrack
+commonpkgincludedir=${pkgincludedir}/common
+
+Name: libntrack
+Description: common ntrack library
+Version: @VERSION@
+Cflags: -I${commonpkgincludedir}
+Libs: -L${libdir} -lntrack
+

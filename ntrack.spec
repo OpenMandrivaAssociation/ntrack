@@ -1,11 +1,12 @@
 Name:           ntrack
 Summary:        Network Connectivity Tracking library for Desktop Applications
 Version:        016
-Release:        %mkrel 3
+Release:        4
 License:        LGPLv3
 Url:            https://launchpad.net/%{name}
-Source:         http://launchpad.net/%{name}/main/%{version}/+download/%{name}-%{version}.tar.gz
+Source0:	http://launchpad.net/%{name}/main/%{version}/+download/%{name}-%{version}.tar.gz
 Patch0:		ntrack-016-relaxed_flags.diff
+Patch1:		ntrack-016-automake-1.13.patch
 Group:          Development/C
 BuildRequires:  autoconf automake libtool
 BuildRequires:  libqt4-devel
@@ -85,7 +86,7 @@ This packages provides the Qt4 bindings for %{name}
 
 #--------------------------------------------------------------------------------
 
-%define libntrackqt_devel %mklibname libntrack-qt4 -d 
+%define libntrackqt_devel %mklibname ntrack-qt4 -d 
  
 %package -n %{libntrackqt_devel}
 Summary:   Network Connectivity Tracking library for Desktop Applications
@@ -106,7 +107,7 @@ Development files (headers and libraries) for ntrack
 #------------------------------------------------------------------------------
  
 %define libntrack_gobject_major 1
-%define libntrack_gobject %mklibname libntrack-gobject %{libntrack_gobject_major}
+%define libntrack_gobject %mklibname ntrack-gobject %{libntrack_gobject_major}
 
 %package -n %{libntrack_gobject}
 Summary:   Network Connectivity Tracking library for Desktop Applications
@@ -126,7 +127,7 @@ This package provides the gobject bindings for %{name}
 
 #------------------------------------------------------------------------------ 
 
-%define libntrack_gobject_devel %mklibname libntrack-gobject -d
+%define libntrack_gobject_devel %mklibname ntrack-gobject -d
 
 %package -n %{libntrack_gobject_devel}
 Summary:   Network Connectivity Tracking library for Desktop Applications
@@ -148,7 +149,7 @@ Development files (headers and libraries) for ntrack
 #------------------------------------------------------------------------------ 
 
 %define libntrack_glib_major 2
-%define libntrack_glib %mklibname libntrack-glib %{libntrack_glib_major}
+%define libntrack_glib %mklibname ntrack-glib %{libntrack_glib_major}
 
 %package -n %{libntrack_glib}
 Summary:   Network Connectivity Tracking library for Desktop Applications
@@ -166,7 +167,7 @@ This package provides the glib bindings for %{name}
 %{_libdir}/libntrack-glib.so.%{libntrack_glib_major}* 
 
 #------------------------------------------------------------------------------  
-%define libntrack_glib_devel %mklibname libntrack-glib -d
+%define libntrack_glib_devel %mklibname ntrack-glib -d
  
 %package -n %{libntrack_glib_devel} 
 Summary:   Network Connectivity Tracking library for Desktop Applications
@@ -203,10 +204,21 @@ Development files (headers and libraries) for ntrack
 
 
 #------------------------------------------------------------------------------
+%package -n python-%name
+Summary:	Python bindings to %name
+Group:		Development/Python
+Requires:	%libntrack_glib = %version-%release
+Requires:	%libntrack_gobject = %version-%release
+
+%description -n python-%name
+Python bindings to %name
+
+%files -n python-%name
+%_libdir/python*/site-packages/pyntrack.so
  
 %prep
 %setup -q 
-%patch0 -p1
+%apply_patches
 
 %build
 mkdir -p m4
@@ -222,13 +234,10 @@ rm -rf %{buildroot}/%{_libdir}/*.a
 rm -rf %{buildroot}/%{_libdir}/*.la
 rm -rf %{buildroot}/%{_libdir}/ntrack/modules/*.a
 rm -rf %{buildroot}/%{_libdir}/ntrack/modules/*.la
+rm -rf %buildroot%_libdir/python*/site-packages/*.a
 
 # dupes
 rm -rf %{buildroot}%{_datadir}/doc/ntrack
-
-%clean
-rm -rf %{buildroot}
-
 
 %changelog
 * Tue Feb 21 2012 Jon Dill <dillj@mandriva.org> 016-3mdv2012.0
