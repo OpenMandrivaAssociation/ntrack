@@ -1,6 +1,0 @@
-{ global:
-ntrack_g_monitor_get;
-ntrack_g_monitor_get_type;
-n_track_glib_state_get_type;
-n_track_glib_event_get_type;
-local: *; };

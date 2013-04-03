@@ -1,6 +1,0 @@
-{ global:
-ntrack_glib_get_state;
-ntrack_g_source_add;
-ntrack_g_source_add_full;
-ntrack_g_source_new;
-local: *; };
