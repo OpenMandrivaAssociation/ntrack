@@ -17,12 +17,13 @@
 Name:		ntrack
 Summary:	Network Connectivity Tracking library for Desktop Applications
 Version:	016
-Release:	6
+Release:	7
 License:	LGPLv3
 Url:		https://launchpad.net/%{name}
 Source0:	http://launchpad.net/%{name}/main/%{version}/+download/%{name}-%{version}.tar.gz
 Patch0:		ntrack-016-relaxed_flags.diff
 Patch1:		ntrack-016-automake-1.13.patch
+Patch2:		ntrack-016-libnl-3.2.patch
 Group:		Development/C
 BuildRequires:	autoconf
 BuildRequires:	automake

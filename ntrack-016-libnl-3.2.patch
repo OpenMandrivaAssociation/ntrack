@@ -1,0 +1,14 @@
+--- ntrack-016/modules/ntrack-libnl.c.omv~	2013-05-27 21:46:41.847350002 +0200
++++ ntrack-016/modules/ntrack-libnl.c	2013-05-27 21:47:05.410055427 +0200
+@@ -530,7 +530,11 @@ update_connectivity (ntrack_monitor_t *s
+ 		op_default_route_disappeared ((struct _ntrack_monitor_arch*) self, nl_info);
+ 	} else if (nl_info->topmost_route && topmost_route) {
+ 		int diff_bits;
++#ifdef HAVE_LIBNL1
+ 		if ((diff_bits = (route_obj_ops.oo_id_attrs | ROUTE_ATTR_OIF
++#else
++		if ((diff_bits = (nl_object_get_id_attrs(OBJ_CAST(&route_obj_ops)) | ROUTE_ATTR_OIF
++#endif
+ 		                  | ROUTE_ATTR_GATEWAY) &
+ 		                  nl_object_diff (OBJ_CAST (nl_info->topmost_route),
+ 		                                  OBJ_CAST (topmost_route)))) {
