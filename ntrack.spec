@@ -110,13 +110,9 @@ Development files (headers and libraries) for ntrack.
 %package -n python-%{name}
 Summary:	Python bindings to %{name}
 Group:		Development/Python
-Requires:	%{libntrackglib} = %{version}-%{release}
-Requires:	%{libntrackgobject} = %{version}-%{release}
 
 %description -n python-%{name}
 Python bindings to %{name}.
-
-
 
 %prep
 %setup -q
