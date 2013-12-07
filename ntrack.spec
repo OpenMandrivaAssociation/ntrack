@@ -17,7 +17,7 @@
 Summary:	Network Connectivity Tracking library for Desktop Applications
 Name:		ntrack
 Version:	016
-Release:	11
+Release:	12
 Group:		Development/C
 License:	LGPLv3
 Url:		https://launchpad.net/%{name}
