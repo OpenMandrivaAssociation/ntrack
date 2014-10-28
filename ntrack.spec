@@ -17,7 +17,7 @@
 Summary:	Network Connectivity Tracking library for Desktop Applications
 Name:		ntrack
 Version:	016
-Release:	15
+Release:	16
 Group:		Development/C
 License:	LGPLv3
 Url:		https://launchpad.net/%{name}
@@ -62,6 +62,7 @@ as online, offline or route changes.
 %package -n %{libntrackqt}
 Summary:	Network Connectivity Tracking library for Desktop Applications
 Group:		System/Libraries
+Obsoletes:	%{_lib}ntrack-qt41
 
 %description -n %{libntrackqt}
 This packages provides the Qt4 bindings for %{name}.
