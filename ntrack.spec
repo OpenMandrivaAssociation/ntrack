@@ -16,20 +16,17 @@
 
 Summary:	Network Connectivity Tracking library for Desktop Applications
 Name:		ntrack
-Version:	016
-Release:	22
+Version:	017
+Release:	1
 Group:		Development/C
 License:	LGPLv3
 Url:		https://launchpad.net/%{name}
 Source0:	http://launchpad.net/%{name}/main/%{version}/+download/%{name}-%{version}.tar.gz
-Patch0:		ntrack-016-relaxed_flags.diff
-Patch1:		ntrack-016-automake-1.13.patch
-Patch2:		ntrack-016-libnl-3.2.patch
 BuildRequires:	libtool
 BuildRequires:	pkgconfig(libnl-3.0)
 BuildRequires:	pkgconfig(python2)
 BuildRequires:	pkgconfig(pygobject-2.0)
-BuildRequires:	pkgconfig(QtCore)
+BuildRequires:	pkgconfig(Qt5Core)
 
 %description
 ntrack aims to be a lightweight and easy to use library for application
