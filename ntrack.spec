@@ -14,10 +14,14 @@
 %define libntrackglib %mklibname ntrack-glib %{libntrackglib_major}
 %define devntrackglib %mklibname ntrack-glib -d
 
+%bcond_with qt4
+
+%global optflags %{optflags} -Wno-error=enum-conversion
+
 Summary:	Network Connectivity Tracking library for Desktop Applications
 Name:		ntrack
 Version:	017
-Release:	1
+Release:	2
 Group:		Development/C
 License:	LGPLv3
 Url:		https://launchpad.net/%{name}
@@ -142,6 +146,7 @@ rm -rf %{buildroot}%{_datadir}/doc/ntrack
 %{_libdir}/pkgconfig/libntrack.pc
 %{_libdir}/libntrack.so
 
+%if %{with qt4}
 %files -n %{libntrackqt}
 %{_libdir}/libntrack-qt4.so.%{ntrackqt_major}*
 
@@ -149,6 +154,7 @@ rm -rf %{buildroot}%{_datadir}/doc/ntrack
 %{_includedir}/%{name}/qt4/
 %{_libdir}/pkgconfig/libntrack-qt4.pc
 %{_libdir}/libntrack-qt4.so
+%endif
 
 %files -n %{libntrackgobject}
 %{_libdir}/libntrack-gobject.so.%{libntrackgobject_major}*
