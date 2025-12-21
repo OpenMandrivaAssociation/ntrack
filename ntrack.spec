@@ -26,6 +26,11 @@ Group:		Development/C
 License:	LGPLv3
 Url:		https://launchpad.net/%{name}
 Source0:	http://launchpad.net/%{name}/main/%{version}/+download/%{name}-%{version}.tar.gz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	libtool
 BuildRequires:	pkgconfig(libnl-3.0)
 BuildRequires:	pkgconfig(python2)
